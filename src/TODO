@@ -8,12 +8,8 @@ someVector.copyInto(someArray);
 
 
 
+//gör så att den bryter efter ord i SLabel
 
+//input hantering
 
-
-
-
-
-
-
-
+//stöd för föörstora förminska bilder

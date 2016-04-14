@@ -3,12 +3,15 @@ package Game;
 import javax.microedition.lcdui.*;//rita p skärmen mm, bibl.
 import javax.microedition.lcdui.game.*;//spel-bibl.
 
+import java.util.Random;
+
 //Shrimp-packages
 import Core.Shrimplet;
 import Core.SWindowHandler;
 import GameCore.GameEngine;
 
 import GUI.SImage;
+import GUI.SImage2;
 import GUI.SAnimatedImage;
 import GUI.SAnimation;
 import GUI.SLabel;
@@ -20,9 +23,11 @@ import GUI.Menu.SMenu;
 
 import SGraphics.ReSizer;
 import SGraphics.SGraphics;
+import SGraphics.SColor;
 import Core.SWindow;
 
 import Math.Math;
+import Math.Vector2f;
 import Math.Vector3f;
 
 
@@ -53,6 +58,13 @@ public class Game extends SWindow implements Runnable{
     
     public int tester = 0;
     public boolean flasher = false;
+    public float testWidthAng = 0;
+    public int[] imgdata;
+    
+    SLabel lbl = new SLabel();double w=0;
+    SImage img;
+    SImage2 img2;
+    
     
 //------------------------------------------------------------------------------
  public Game() {//konstruktorn
@@ -69,12 +81,24 @@ public class Game extends SWindow implements Runnable{
      GUIObject.setGraphics(g);
      SGraphics.setGraphics(g);
      
+     
      //init
      
+     img2 = new SImage2("menu.png");
+     img2.setPosition(0.0f, 0.35f);
+     img2.mark();
      
-     
-     SImage img = new SImage("logo.png");
-     SLabel lbl = new SLabel();double w=0;
+     img = new SImage("menu.png");     
+     img.setPosition(0.0f, 0.0f);
+     img.mark();
+    /*
+     imgdata = new int[img.getHeight()*img.getWidth()];
+     try {
+        img.getImage().getRGB(imgdata, 0, img.getWidth(), 0, 0, img.getWidth(), img.getHeight());    
+     } catch (Exception e) {
+         e.printStackTrace();
+     }
+    */ 
      StatusBar sb = new StatusBar();
      SAnimatedImage aimg = new SAnimatedImage("menu.png",5,3);
      
@@ -100,25 +124,38 @@ public class Game extends SWindow implements Runnable{
      lbl.mark();
      lbl.setPosition(0.0f, 0.0f);
      lbl.setMaxWidth(1.0f);
-     lbl.setText("Bobbo babian bubbar blåa bollar, men inte gröna eftersom han är färgblind..getter äter gräs, ibland iaf");
+     lbl.setCutWords(false);
+     lbl.setText("Bobbo babian bubbar blåa bollar, men inte gröna eftersom han är färgblind.. getter äter gräs, ibland iaf");
      lbl.recalc();
-     
-     img.setPosition(0.3f, 0.3f);
-     
+          
      SAnimation anim = new SAnimation(new int[]{1,4,7,10,7,4},5);
-     
+        
      aimg.setPosition(0.01f, 0.01f);
      aimg.mark();
      aimg.addAnimation(anim);
      aimg.setAnimation(0);
      aimg.setAnimitionType(SAnimatedImage.ANIMATIONS);
 
-     add(aimg);
-     add(img);
-     add(sb);
-     add(lbl);
-     add(me);
-        
+     Random rnd = new Random();
+     
+     for (int i = 0; i < 10; i++) {
+         
+         SColor a = new SColor(rnd.nextInt());
+         SColor b = new SColor(rnd.nextInt());
+         SColor c = new SColor(rnd.nextInt());
+         SColor d = new SColor(rnd.nextInt());
+         
+         
+       System.out.println(a + "&" + b + "&" + c + "&" + d + "=" + SColor.bilinearmix(a, b, c, d));
+     //  System.out.println(new SColor(rnd.nextInt(255),rnd.nextInt(255),rnd.nextInt(255),rnd.nextInt(255)));
+     }
+     
+//     add(aimg);
+    add(img);
+//     add(sb);
+//     add(lbl);
+//     add(me);
+        add(img2);
      restart();
 }  
 //------------------------------------------------------------------------------
@@ -138,36 +175,47 @@ public class Game extends SWindow implements Runnable{
     
     me.select(tester++);
 
-    paint(g);
+    if(flasher){g.setColor(0xFF00FFFF);flasher = false;}else{g.setColor(0xFFFF00FF);flasher = true;}    
+    SGraphics.fillRect((float)java.lang.Math.abs(0.9f*Math.cos((float)(w+=0.01d))-0.1f), (float)java.lang.Math.abs(0.9f*Math.cos((float)(w))-0.1f), 0.1f, 0.1f);
+       
+     paint(g);
     
-    System.out.println("asking");
+    //int[] rgbrandomdata = new int[this.getHeight()*this.getWidth()];
+    //Random rnd = new Random();
     
-    ask("Continue without saving?",new String[]{"Yes","No","Maybe"});
+   // for(int i = 0;i<rgbrandomdata.length;i++){
+     //   rgbrandomdata[i] = rnd.nextInt();
+  //  }
+    
+    //g.drawRGB(rgbrandomdata,0,this.getWidth(),0,0,this.getWidth(),this.getHeight(),true);
+    
+   // int[] invimgdata = new int[imgdata.length];
+    
+   //   for (int i = 0; i < invimgdata.length; i++) {
+   //       invimgdata[i] = imgdata[imgdata.length - i - 1];
+   //   }
     
     
-    if(flasher){
-        g.setColor(0xFF00FFFF);
-        flasher = false;
+   // g.drawRGB(imgdata, 0, img.getWidth(), 0, 0, img.getWidth(), img.getHeight(), true);
+    
+    
+    //ask("Continue without saving?",new String[]{"Yes","No","Maybe"});
    
-    }else{
-        g.setColor(0xFFFF00FF);
-        flasher = true;
-    }
-    SGraphics.fillRect(0.9f, 0.9f, 0.1f, 0.1f);
+    lbl.setMaxWidth(0.3f + (float)java.lang.Math.abs(0.7f*Math.cos((float)(w+=0.01d))));
+    lbl.recalc();
     
+  
+    
+    System.gc();
+  
   }  
  //------------------------------------------------------------------------------
  private void CheckCollision(){//tittar om någon av spritsen kolliderar
-    
  }
  //------------------------------------------------------------------------------
  private void Physics(){//updaterar fysiken i spelet
-    
  }
  //------------------------------------------------------------------------------       
  private void restart(){//restarts level
-
  }
- 
-
 }
