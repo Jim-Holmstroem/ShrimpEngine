@@ -9,12 +9,23 @@ package Core;
  *
  * @author SlimJim xP
  */
-public class SWindowHandler {
+import javax.microedition.lcdui.Canvas;
+import javax.microedition.lcdui.Graphics;
 
-    public SWindow[] winds= new SWindow[10];
+
+public class SWindowHandler extends Canvas{
+
+    private SWindow[] winds= new SWindow[10];
+    private int currentWindow = 0;
     
     SWindowHandler(){
-    
+       
     }
+    
+    public void paint(Graphics g){
+        
+        
+    }
+    
   
 }

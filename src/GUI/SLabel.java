@@ -17,6 +17,8 @@ public class SLabel extends GUIObject{
     private Vector rows = new Vector();//<--varje rad har en egen string
     private int maxWidth=-1;//om -1 så finns dt ingen maxWidth 
     private int color; 
+    private boolean cutWords = false;//om det är okey att klippa mitt i ord
+    
     
     public SLabel(){
         
@@ -28,30 +30,56 @@ public class SLabel extends GUIObject{
         if(maxWidth==-1){
             rows.addElement(text);
         }else{
-            char[] textbuf = new char[text.length()];
-            text.getChars(0, textbuf.length, textbuf , 0);
-            Font f = g.getFont();
-            int rowWidth = 0;
-            String tmpstr = "";
-            
-            for (int i = 0; i < textbuf.length; i++) {
-                char c = textbuf[i];
-                rowWidth+=f.charWidth(c);
-                if(rowWidth<=maxWidth){
-                    tmpstr=tmpstr+String.valueOf(c);
-                }else{
-                    rows.addElement(new String(tmpstr));
-                    tmpstr="";
-                    i--;//ta med den som inte fick plats i nästa
-                    rowWidth=0;
-                }             
+            if(cutWords){
+                char[] textbuf = new char[text.length()];
+                text.getChars(0, textbuf.length, textbuf , 0);
+                Font f = g.getFont();
+                int rowWidth = 0;
+                String tmpstr = "";
+
+                for(int i = 0; i < textbuf.length; i++){
+                    char c = textbuf[i];
+                    rowWidth+=f.charWidth(c);
+                    if(rowWidth<=maxWidth){
+                        tmpstr=tmpstr+String.valueOf(c);
+                    }else{
+                        rows.addElement(new String(tmpstr));
+                        tmpstr="";
+                        i--;//ta med den som inte fick plats i nästa
+                        rowWidth=0;
+                    }             
+                }
+                rows.addElement(new String(tmpstr));//lägger till buffert som blir kvar när man är klar med den sista raden, borde kunna gå att göra snyggare          
+            }else{//här ska metoden för att ändra rad utan att kapa ord..har inte gjorts än..
+                char[] textbuf = new char[text.length()];
+                text.getChars(0, textbuf.length, textbuf , 0);
+                Font f = g.getFont();
+                int rowWidth = 0;
+                String tmpstr = "";
+
+                for(int i = 0; i < textbuf.length; i++){
+                    char c = textbuf[i];
+                    rowWidth+=f.charWidth(c);
+                    if(rowWidth<=maxWidth){
+                        tmpstr = tmpstr+String.valueOf(c);
+                    }else{
+                        rows.addElement(new String(tmpstr));
+                        tmpstr="";
+                        i--;//ta med den som inte fick plats i nästa
+                        rowWidth=0;
+                    }             
+                }
+                rows.addElement(new String(tmpstr));//lägger till buffert som blir kvar när man är klar med den sista raden, borde kunna gå att göra snyggare                
             }
-            rows.addElement(new String(tmpstr));//lägger till buffert som blir kvar när man är klar med den sista raden, borde kunna gå att göra snyggare          
         }
     }
     
     public void setColor(int color){
         this.color = color;
+    }
+    
+    public void setCutWords(boolean cutWords){
+        this.cutWords = cutWords;
     }
     
     public void setMaxWidth(float maxWidth){
@@ -77,6 +105,10 @@ public class SLabel extends GUIObject{
     
     private void recalcHeight(){
         h = g.getFont().getHeight()*rows.size();          
+    }
+    
+    private static boolean isSpace(char a){
+        return (" ".compareTo(String.valueOf(a))==0);
     }
     
     public void paint(Graphics g){

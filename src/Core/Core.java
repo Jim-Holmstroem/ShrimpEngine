@@ -16,7 +16,8 @@ public class Core {
 
     public static Image loadImage(String filename){//inte säker på om den funkar, kolla vad som R fel på den..
         try {
-            return Image.createImage(filename);
+           // System.out.println(""+Image.createImage(filename));
+            return Image.createImage("/pic/"+filename);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

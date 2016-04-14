@@ -57,10 +57,8 @@ public class SAnimation {
     }
     
     public void update(){
-        System.out.println("counter"+counter);
         if(++counter>=upf){
             nextFrame();
-            System.out.println("frame"+frame);
             counter = 0;
         }
     }

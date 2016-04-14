@@ -22,17 +22,11 @@ public class SAnimatedImage extends SImage {
     protected int currentFrame = 0;
     private boolean updateOnPaint = true;
     
-    
-    
     //different animation types (int:animationType)
     public final static int STATIC = 0,         //current frame until user changes frame 
     // ??                   ROLLING = 1,        //rolling, taking next frame for every update
-                            ANIMATIONS = 2;     //user defined animations
-            
-    
-    
-    
-    
+                            ANIMATIONS = 2,     //user defined animations
+                            STATIC_ANIMATIONS = 3;
     protected int animationType = STATIC; 
     
     private Vector animations = new Vector();
@@ -58,6 +52,15 @@ public class SAnimatedImage extends SImage {
             setImage(img);
         else
             setImage(Image.createImage(img));
+    }
+    
+    public SAnimatedImage(int rows,int cols){
+        this.rows = rows;
+        this.cols = cols;
+    }
+        
+    public void setImage(Image img){
+        super.setImage(img);
         w/=cols;
         h/=rows;
     }
@@ -108,6 +111,9 @@ public class SAnimatedImage extends SImage {
         if(animationType==ANIMATIONS){
             currentAnim.update();
             setFrame(currentAnim.getRealFrame());    
+        }
+        if(animationType==STATIC_ANIMATIONS){
+            setFrame(currentAnim.getRealFrame());
         }
     }
     

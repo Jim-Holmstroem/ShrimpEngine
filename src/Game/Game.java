@@ -7,9 +7,6 @@ import javax.microedition.lcdui.game.*;//spel-bibl.
 import Core.Shrimplet;
 import GameCore.GameEngine;
 
-
-
-
 import GUI.SImage;
 import GUI.SAnimatedImage;
 import GUI.SAnimation;
@@ -49,10 +46,11 @@ public class Game extends GameCanvas implements Runnable{
 
     public SWindow win = new SWindow();
     
-    SMenuObject mo;
+    public SWindow win2 = new SWindow();
+    
     SMenu me;
     
-    
+    public int tester = 0;
     public boolean flasher = false;
     
 //------------------------------------------------------------------------------
@@ -88,24 +86,17 @@ public class Game extends GameCanvas implements Runnable{
      StatusBar sb = new StatusBar();
      SAnimatedImage aimg = new SAnimatedImage("menu.png",5,3);
      
-     mo = new SMenuObject("menu.png",5,3,new SAnimation(new int[]{3,4,5},1));
-     
-     mo.setPosition(0.5f, 0.5f);
-     mo.setStatus(SMenuObject.MARKED);
-     
-     me = new SMenu(
+     me = new SMenu("menu.png",
          new SMenuObject[]{
-                           new SMenuObject("menu.png",5,3,new SAnimation(new int[]{ 0, 1, 2},1)),
-                           new SMenuObject("menu.png",5,3,new SAnimation(new int[]{ 3, 4, 5},1)),
-                           new SMenuObject("menu.png",5,3,new SAnimation(new int[]{ 6, 7, 8},1)),
-                           new SMenuObject("menu.png",5,3,new SAnimation(new int[]{ 9,10,11},1)),
-                           new SMenuObject("menu.png",5,3,new SAnimation(new int[]{12,13,14},1))
+                           new SMenuObject(5,3,new SAnimation(new int[]{ 0, 1, 2},1)),
+                           new SMenuObject(5,3,new SAnimation(new int[]{ 3, 4, 5},1)),
+                           new SMenuObject(5,3,new SAnimation(new int[]{ 6, 7, 8},1)),
+                           new SMenuObject(5,3,new SAnimation(new int[]{ 9,10,11},1)),
+                           new SMenuObject(5,3,new SAnimation(new int[]{12,13,14},1))
                           }
      );
      
      me.setPosition(0.50f, 0.50f);
-     
-     
      
      sb.setPosition(0.15f, 0.8f);
      sb.setDimension(0.25f, 0.02f);
@@ -122,7 +113,7 @@ public class Game extends GameCanvas implements Runnable{
      
      img.setPosition(0.3f, 0.3f);
      
-     SAnimation anim = new SAnimation(new int[]{1,4,7,10,7,4},2);
+     SAnimation anim = new SAnimation(new int[]{1,4,7,10,7,4},5);
      
      aimg.setPosition(0.01f, 0.01f);
      aimg.mark();
@@ -130,15 +121,14 @@ public class Game extends GameCanvas implements Runnable{
      aimg.setAnimation(0);
      aimg.setAnimitionType(SAnimatedImage.ANIMATIONS);
 
-     
-//     win.add(aimg);
+     win.add(aimg);
      win.add(img);
-//     win.add(sb);
-//     win.add(lbl);
-//     win.add(mo);
+     win.add(sb);
+     win.add(lbl);
      win.add(me);
      
-     
+     win2.add(me);
+        
      restart();
 }  
 //------------------------------------------------------------------------------
@@ -155,17 +145,20 @@ public class Game extends GameCanvas implements Runnable{
     //Clear screen
     SGraphics.setColor(0xFF000000);
     SGraphics.fillRect(0.0f, 0.0f, 1.0f, 1.0f);  
+
     
-    win.paint(g);
-      
+    me.select(tester++);
+
+    
     if(flasher){
-        mo.setStatus(SMenuObject.MARKED);
         g.setColor(0xFF00FFFF);
         flasher = false;
+    win.paint(g);
+   
     }else{
-        mo.setStatus(SMenuObject.UNMARKED);
         g.setColor(0xFFFF00FF);
         flasher = true;
+    win2.paint(g);
     }
     
     g.fillRect(200, 200, 10, 10);
@@ -197,6 +190,4 @@ public class Game extends GameCanvas implements Runnable{
  private void restart(){//restarts level
 
  }
-
-
 }
