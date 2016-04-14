@@ -1,3 +1,5 @@
+package Game;
+
 import javax.microedition.lcdui.*;//rita p skärmen mm, bibl.
 import javax.microedition.lcdui.game.*;//spel-bibl.
 import javax.microedition.lcdui.game.Sprite;//sprites bibl.
@@ -5,6 +7,15 @@ import java.util.Vector;//vector-arrayer
 import java.lang.Math;//matte-bibl.
 import javax.microedition.media.*;//ljud
 import java.io.*;//läs och skriv
+
+//Shrimp-packages
+import GUI.*;
+import SIO.ReadWrite;
+import GameCore.Shrimp;
+import GameCore.ShrimpList;
+import GameCore.GameEngine;
+import Core.Shrimplet;
+
 
 
 /* saker som bör göras :
@@ -539,9 +550,9 @@ public void menuUpdate(){//sätter vilka som inte är tillgängliga lr focuserade l
 
     for(int i = 0; i<menu.size();i++){//gå igenom hela menyn
         if(i == menu.focused){//om det är den som är i focus
-            menu.getMenuObj(i).status = menu.FOCUS;    
+            menu.getMenuObj(i).status = MenuList.FOCUS;    
         }else{
-            menu.getMenuObj(i).status = menu.UNFOCUS;
+            menu.getMenuObj(i).status = MenuList.UNFOCUS;
         }    
     }
    

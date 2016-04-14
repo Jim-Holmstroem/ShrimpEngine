@@ -1,4 +1,9 @@
+package GUI;
+
+import Game.Game;
 import javax.microedition.lcdui.*;
+import GameCore.Shrimp;
+
 
 public class CommercialBreak {
     public int timer = 0;
@@ -91,15 +96,15 @@ public class CommercialBreak {
     bargraphInit.draw(game.g);
     
     if(100*hexCounter<16){
-        game.g.drawString("0x00000" + Integer.toHexString(100*hexCounter--) + "h",0,0,game.g.TOP|game.g.LEFT);
+        game.g.drawString("0x00000" + Integer.toHexString(100*hexCounter--) + "h",0,0,Graphics.TOP|Graphics.LEFT);
     }else if(100*hexCounter<16*16){
-        game.g.drawString("0x0000" + Integer.toHexString(100*hexCounter--) + "h",0,0,game.g.TOP|game.g.LEFT);
+        game.g.drawString("0x0000" + Integer.toHexString(100*hexCounter--) + "h",0,0,Graphics.TOP|Graphics.LEFT);
     }else if(100*hexCounter<16*16*16){
-        game.g.drawString("0x000" + Integer.toHexString(100*hexCounter--) + "h",0,0,game.g.TOP|game.g.LEFT);
+        game.g.drawString("0x000" + Integer.toHexString(100*hexCounter--) + "h",0,0,Graphics.TOP|Graphics.LEFT);
     }else if(100*hexCounter<16*16*16*16){
-        game.g.drawString("0x00" + Integer.toHexString(100*hexCounter--) + "h",0,0,game.g.TOP|game.g.LEFT);
+        game.g.drawString("0x00" + Integer.toHexString(100*hexCounter--) + "h",0,0,Graphics.TOP|Graphics.LEFT);
     }else{
-        game.g.drawString("0x0" + Integer.toHexString(100*hexCounter--) + "h",0,0,game.g.TOP|game.g.LEFT);
+        game.g.drawString("0x0" + Integer.toHexString(100*hexCounter--) + "h",0,0,Graphics.TOP|Graphics.LEFT);
     }
     
     game.gE.displayRoller();

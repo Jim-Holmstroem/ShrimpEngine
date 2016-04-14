@@ -1,3 +1,5 @@
+package GUI;
+
 import javax.microedition.lcdui.*;
 
 public class BarGraph {

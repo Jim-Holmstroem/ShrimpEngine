@@ -1,3 +1,5 @@
+package GameCore;
+
 import java.util.*;
 import javax.microedition.lcdui.*;
 

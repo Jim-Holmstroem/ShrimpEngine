@@ -1,3 +1,5 @@
+package GUI;
+
 /*            [MenuObject.java]
  *
  *  A object in the menu
@@ -8,6 +10,7 @@
  */
 
 import javax.microedition.lcdui.*;
+import GameCore.Shrimp;
 
 public class MenuObject{  
     public int x,y;

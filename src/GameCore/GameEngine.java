@@ -1,3 +1,5 @@
+package GameCore;
+
 /*            [GameEngine.java]
  *
  *
@@ -7,6 +9,8 @@
  *  @Author: Jim 'SlimJim' Holmström for Shrimp Gaming UF
  */
 
+import Game.*;
+import Game.Game;
 import javax.microedition.lcdui.*;
 import java.lang.Math;
 import java.util.*;

@@ -1,3 +1,6 @@
+package GUI;
+
+import Game.Game;
 import java.lang.String;
 import javax.microedition.lcdui.Font;
 

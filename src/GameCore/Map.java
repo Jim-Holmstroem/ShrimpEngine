@@ -1,7 +1,11 @@
+package GameCore;
+
 /**
  *
  * @author SlimJim
  */
+import Game.*;
+import Game.Game;
 import javax.microedition.lcdui.*;
 
 //Ska man använda sig av den hära`???

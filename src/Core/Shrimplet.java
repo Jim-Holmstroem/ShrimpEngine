@@ -1,5 +1,8 @@
+package Core;
+
 import javax.microedition.lcdui.*;
 import javax.microedition.midlet.*;
+import Game.Game;
 
 public class Shrimplet extends MIDlet {
         public Game canvas;

@@ -1,3 +1,5 @@
+package GameCore;
+
 import javax.microedition.lcdui.Image;
 //------------------------------------------------------------------------------
 public class Level {

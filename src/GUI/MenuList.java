@@ -1,3 +1,5 @@
+package GUI;
+
 /*            [MenuObject.java]
  *
  *  a menu consisting of menuobjects
@@ -11,13 +13,16 @@ import java.util.Vector;
 import javax.microedition.lcdui.*;
 import javax.microedition.lcdui.game.*;
 
+import GameCore.ShrimpList;
+import GameCore.Shrimp;
+
 public class MenuList extends Vector{ 
     
     public Shrimp shrimp = null; //Shrimpen som ritar ut alla menuobjecten
     public int focused = 0; //vilken av objecten som är focuserade
-    static int UNFOCUS = 0,
-               FOCUS = 1,
-               NOTAVALIBLE = 2;
+    public static int UNFOCUS = 0,
+                        FOCUS = 1,
+                  NOTAVALIBLE = 2;
     
     public MenuList(String fileName,int frameHeight,int frameWidth){ //ladda in bilden som man ska ha till menyn
         shrimp = new Shrimp(LoadImage(fileName),frameHeight,frameWidth);

@@ -1,3 +1,5 @@
+package SIO;
+
 // spara/ladda information i en fil
 
 import javax.microedition.rms.RecordStore;
