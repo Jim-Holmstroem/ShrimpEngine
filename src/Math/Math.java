@@ -91,6 +91,38 @@ public static int fak(int n){//n!
     }
 }
 
+public static float floor(float a){
+    //special case
+    if(Float.isInfinite(a))
+        return Float.POSITIVE_INFINITY;
+    if(Float.isNaN(a))
+        return Float.NaN;
+    if(a == 0.0f)
+        return 0.0f;
+    if(a == -0.0f)
+        return -0.0f;
+    
+    //general case
+    return (float)((int)a);
+}
+
+public static float ceil(float a){
+    //special cases
+    if(Float.isInfinite(a))
+        return Float.POSITIVE_INFINITY;
+    if(Float.isNaN(a))
+        return Float.NaN;
+    if(a == 0.0f)
+        return 0.0f;
+    if(a == -0.0f)
+        return -0.0f;
+    if(a<0.0f && a>-1.0f)
+        return -0.0f;
+    
+    //general case
+    return (float)((int)(a+1.0f));
+}
+
 
 //---------------------[  2D  ]-------------------------------------------------
 

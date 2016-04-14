@@ -1,7 +1,7 @@
 /*
  * a SColor that has a weighted  that is taking in consern when calculating a color mix
- * I don't think I neeed the weighted color for now :)
- */
+ * I don't think I neeed the weighted color for now :) är det enklare att köra med lösa float som hör till färgen ist?
+ */ 
 
 package SGraphics;
 
@@ -9,8 +9,6 @@ package SGraphics;
  *
  * @author SlimJim xP
  */
-import SGraphics.SColor;
-
 
 public class SWColor extends SColor{
     float weight;

@@ -74,6 +74,12 @@ public class SWindow extends GameCanvas{
                 System.out.println("upp");
                 askMark(1);
             break;
+            case GameCanvas.KEY_NUM4:
+                System.out.println("upp");
+            break;
+            case GameCanvas.KEY_NUM6:
+                System.out.println("upp");
+            break;         
             default:
             break;
         }
@@ -94,7 +100,7 @@ public class SWindow extends GameCanvas{
         q.pos += move;//hur mkt man ska röra markören med
     }
     
-    class Question{
+    class Question{//funkar den här ordentligt som den ska om man lägger in input??
         Graphics g;
         boolean running = true;
         long oldTime,mspu = 50;

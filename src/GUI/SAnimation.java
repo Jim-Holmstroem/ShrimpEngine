@@ -9,6 +9,7 @@ package GUI;
  *
  * @author SlimJim xP
  */
+
 public class SAnimation {
     private int upf;    //upf - updates per framechange
     private int counter = 0;

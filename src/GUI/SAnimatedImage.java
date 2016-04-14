@@ -11,7 +11,6 @@ package GUI;
  */
 
 import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.Image;
 
 import java.util.Vector;
 
@@ -30,28 +29,29 @@ public class SAnimatedImage extends SImage {
     protected int animationType = STATIC; 
     
     private Vector animations = new Vector();
+    
+    
     private SAnimation currentAnim;
     
     public SAnimatedImage() {
         rows = 1;
-        cols = 1;       
+        cols = 1;      
     }
 
     public SAnimatedImage(String filename,int rows,int cols){
         this.rows = rows;
         this.cols = cols;
+        System.out.print("loading imgdata...");
         loadImage(filename);
+        System.out.println("OK");
         w/=cols;
         h/=rows;
     }
     
-    public SAnimatedImage(Image img,int rows,int cols,boolean wantCopy){
+    public SAnimatedImage(SImageData imgdata,int rows,int cols){
+        this.imgdata = imgdata;
         this.rows = rows;
         this.cols = cols;
-        if(wantCopy)
-            setImage(img);
-        else
-            setImage(Image.createImage(img));
     }
     
     public SAnimatedImage(int rows,int cols){
@@ -59,50 +59,31 @@ public class SAnimatedImage extends SImage {
         this.cols = cols;
     }
         
-    public void setImage(Image img){
-        super.setImage(img);
+    public void setImage(SImageData imgdata){
+        setImage(imgdata);
         w/=cols;
         h/=rows;
     }
     
-    public void addAnimation(SAnimation anim){
-        animations.addElement(anim);
-    }
-    public void removeAnimation(int i){
-        animations.removeElementAt(i);
-    }
-    public void removeAnimtion(SAnimation anim){
-        animations.removeElement(anim);
-    }
-    public void removeAllAnimations(){
-        animations.removeAllElements();
-    }
-    public SAnimation getAnimationAt(int i){
-        return ((SAnimation)animations.elementAt(i));
-    }
-    public Vector getAllAnimations(){
-        return this.animations;
-    }
+    //Animations
+    public void addAnimation(SAnimation anim){animations.addElement(anim);}
+    public void removeAnimation(int i){animations.removeElementAt(i);}
+    public void removeAnimtion(SAnimation anim){animations.removeElement(anim);}
+    public void removeAllAnimations(){animations.removeAllElements();}
+    public SAnimation getAnimationAt(int i){return ((SAnimation)animations.elementAt(i));}
+    public Vector getAllAnimations(){return this.animations;}
+    public void setAnimitionType(int animationType){this.animationType = animationType;}
+    public void setAnimation(int i){currentAnim = getAnimationAt(i);}
     
-    public void setUpdateOnPaint(boolean updateOnPaint){
-        this.updateOnPaint = updateOnPaint;
-    }
-    public void setAnimitionType(int animationType){
-        this.animationType = animationType;
-    }
-    public void setAnimation(int i){
-        currentAnim = getAnimationAt(i);
-    }
-    public void setFrame(int frame){  
+    public void setUpdateOnPaint(boolean updateOnPaint){this.updateOnPaint = updateOnPaint;}
+    
+    //Frames
+    public void setFrame(int frame){
         this.currentFrame = frame;
         this.currentFrame%=cols*rows;
     }
-    public void setFrameInAnimation(int frame){
-        setFrame(currentAnim.getRealFrame(frame));
-    }
-    public int getFrame(){
-        return this.currentFrame;
-    }
+    public void setFrameInAnimation(int frame){setFrame(currentAnim.getRealFrame(frame));}
+    public int getFrame(){return this.currentFrame;}
     
     public void update(){
         if(animationType==STATIC){
@@ -121,8 +102,11 @@ public class SAnimatedImage extends SImage {
         if(visible){
             if(updateOnPaint)
                 update();
-            if(img!=null)
-                g.drawRegion(img, w*(currentFrame%cols), h*(currentFrame/cols), w, h, 0, x, y, Graphics.TOP|Graphics.LEFT);
+            if(imgdata.data!=null)
+               // g.drawRegion(imgdata.data, w*(currentFrame%cols), h*(currentFrame/cols), w, h, 0, x, y, Graphics.TOP|Graphics.LEFT);
+               g.drawRGB(imgdata.data,3*w,6*w/*imgdata.size()*/,w*(currentFrame%cols), h*(currentFrame/cols),w,h,true);
+    
+            
             if(marked)
                 paintMarking(g);
         }

@@ -14,6 +14,8 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 import GUI.GUIObject;
+import GUI.SImageData;
+
 import SGraphics.ReSizer;
 import Core.Core;
 
@@ -21,16 +23,16 @@ import Core.Core;
 public class SMenu extends GUIObject{
 
     private SMenuObject[] menuobjs;
-    private Image img;
+    private SImageData img;
     
     private int selected;
     
     
     public SMenu(String filename, SMenuObject[] menuobjs){
-        img = Core.loadImage(filename);
+        img = GUI.SImage.getImageData(filename);
         this.menuobjs = menuobjs;
         
-        for(int i = 0;i<menuobjs.length;i++){
+        for(int i = 0;i<menuobjs.length;i++){//kopplar alla så att dom får tillgång till bilden man använder
             menuobjs[i].setImage(img);
         }
         

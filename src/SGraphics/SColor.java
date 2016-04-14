@@ -14,6 +14,29 @@ public class SColor {
     int color;
     
     public SColor(int color){        
+        setColor(color);
+    }
+    
+    public SColor(int alfa,int red,int green,int blue){
+         setColor(alfa,red,green,blue);
+    }
+    
+    public SColor(int[] cc){//colorcomponents in array
+        setColor(cc);
+    }
+    
+    public SColor(){
+        alfa = 0;red = 0;green = 0;blue = 0;
+    }
+    
+    public int getColor(){return color;}
+    public int getAlfa(){return this.alfa;}
+    public int getRed(){return this.red;}
+    public int getGreen(){return this.green;}
+    public int getBlue(){return this.blue;}
+    public int[] getComponents(){return new int[]{alfa,red,green,blue};}
+    
+    public void setColor(int color){
           // color =  ARGB (hh,hh,hh,hh) = (A,R,G,B)
          alfa =  (color    )>>>24; //(ARGB    )>>>24 = 000A
          red =   (color<<8 )>>>24; //(ARGB<<8 )>>>24 = RGB0>>>24 = 000R
@@ -22,7 +45,7 @@ public class SColor {
          this.color = color;
     }
     
-    public SColor(int alfa,int red,int green,int blue){
+    public void setColor(int alfa,int red,int green,int blue){
          this.alfa =  alfa;
          this.red =   red;
          this.green = green;
@@ -30,28 +53,18 @@ public class SColor {
          this.color = alfa<<24 | red<<16 | green<<8 | blue;
     }
     
-    public SColor(int[] cc){//colorcomponents in array
-        if(cc.length == 4){
+    public void setColor(int[] cc){
+    if(cc.length == 4){
             this.alfa =  cc[0];
             this.red =   cc[1];
             this.green = cc[2];
             this.blue =  cc[3];
-            this.color = cc[0]<<24 + cc[1]<<16 + cc[2]<<8 + cc[3];
+            this.color = cc[0]<<24 | cc[1]<<16 | cc[2]<<8 | cc[3];
         }else{
             System.out.println("must have 4 color components. Color not inited.");
         }
     }
     
-    public SColor(){
-        alfa = 0;red = 0;green = 0;blue = 0;
-    }
-    
-    public int getColor(){
-        return color;
-    }
-    public int[] getComponents(){
-        return new int[]{alfa,red,green,blue};
-    }
     
     public static SColor mix(SColor a,SColor b){
         int[] ac = a.getComponents();
@@ -64,6 +77,9 @@ public class SColor {
     }
     
     public static SColor bilinearmix(SColor a,SColor b,SColor c, SColor d){//the med value of all channels ARGB
+        
+        
+        
         return new SColor((a.alfa+b.alfa+c.alfa+d.alfa)/4,(a.red+b.red+c.red+d.red)/4,(a.green+b.green+c.green+d.green)/4,(a.blue+b.blue+c.blue+d.blue)/4);
     }
     public static SColor bilinearmix(SWColor[] a){

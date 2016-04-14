@@ -66,14 +66,18 @@ public class SWindowHandler extends GameCanvas implements Runnable{
         win.init(); //kör initsieringen ingenting före den om det inte måste, kontrollera flera gånger om så är faller            
         while(true){
             oldTime  = System.currentTimeMillis();
+            try{
+                
             win.draw();
             win.flushGraphics(); //målar buffern p skärmen
             System.gc();//<--rensar skräp //finns dt några nackdelar???(processorkraft?)
-            try{
-                
+            
                 Thread.sleep(mspu - (System.currentTimeMillis()-oldTime));
                 oldTime = System.currentTimeMillis();
-            }catch(Exception e){}
+            }catch(Exception e){
+                System.out.println("error in window #" + currentWindow + ": "+e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ import Core.SWindowHandler;
 import GameCore.GameEngine;
 
 import GUI.SImage;
-import GUI.SImage2;
+import GUI.SImage;
 import GUI.SAnimatedImage;
 import GUI.SAnimation;
 import GUI.SLabel;
@@ -33,8 +33,7 @@ import Math.Vector3f;
 
 
 /* saker som bör göras :
- * -> enklare att skapa menyer
- * -> transparence vid zoomning
+
  * -> softkeys i menyn, site:http://www.j2meforums.com/forum/index.php?topic=5147.0
  * -> spara där man är (alla object som behöver sparas måste kunna göra dom viktiga variablerna till byteBuffer och sedan läsas av + att man måste ha ett system för hur man läser av flera i en lista...)
 
@@ -63,8 +62,8 @@ public class Game extends SWindow implements Runnable{
     
     SLabel lbl = new SLabel();double w=0;
     SImage img;
-    SImage2 img2;
-    
+    SImage img2;
+    SAnimatedImage aimg;
     
 //------------------------------------------------------------------------------
  public Game() {//konstruktorn
@@ -84,11 +83,11 @@ public class Game extends SWindow implements Runnable{
      
      //init
      
-     img2 = new SImage2("menu.png");
-     img2.setPosition(0.0f, 0.35f);
+     img2 = new SImage("menu.png", true);
+     img2.setPosition(0.0f, 0.5f);
      img2.mark();
      
-     img = new SImage("menu.png");     
+     img = new SImage("menu.png", false);     
      img.setPosition(0.0f, 0.0f);
      img.mark();
     /*
@@ -100,8 +99,8 @@ public class Game extends SWindow implements Runnable{
      }
     */ 
      StatusBar sb = new StatusBar();
-     SAnimatedImage aimg = new SAnimatedImage("menu.png",5,3);
      
+    /* 
      me = new SMenu("menu.png",
          new SMenuObject[]{
                            new SMenuObject(5,3,new SAnimation(new int[]{ 0, 1, 2},1)),
@@ -113,7 +112,7 @@ public class Game extends SWindow implements Runnable{
      );
      
      me.setPosition(0.50f, 0.50f);
-     
+     */
      sb.setPosition(0.15f, 0.8f);
      sb.setDimension(0.25f, 0.02f);
      sb.setSteps(1000);
@@ -127,35 +126,37 @@ public class Game extends SWindow implements Runnable{
      lbl.setCutWords(false);
      lbl.setText("Bobbo babian bubbar blåa bollar, men inte gröna eftersom han är färgblind.. getter äter gräs, ibland iaf");
      lbl.recalc();
-          
-     SAnimation anim = new SAnimation(new int[]{1,4,7,10,7,4},5);
-        
+     
+     
+     aimg = new SAnimatedImage("menu.png",5,3);
+     System.out.print("initing aimg..");
      aimg.setPosition(0.01f, 0.01f);
      aimg.mark();
-     aimg.addAnimation(anim);
+     aimg.addAnimation(new SAnimation(new int[]{1,4,7,10,7,4},5));
      aimg.setAnimation(0);
      aimg.setAnimitionType(SAnimatedImage.ANIMATIONS);
-
-     Random rnd = new Random();
+     System.out.println("OK");
      
-     for (int i = 0; i < 10; i++) {
+     //Random rnd = new Random();
+     
+    // for (int i = 0; i < 10; i++) {
          
-         SColor a = new SColor(rnd.nextInt());
-         SColor b = new SColor(rnd.nextInt());
-         SColor c = new SColor(rnd.nextInt());
-         SColor d = new SColor(rnd.nextInt());
+     //    SColor a = new SColor(rnd.nextInt());
+     //    SColor b = new SColor(rnd.nextInt());
+     //    SColor c = new SColor(rnd.nextInt());
+     //    SColor d = new SColor(rnd.nextInt());
          
          
-       System.out.println(a + "&" + b + "&" + c + "&" + d + "=" + SColor.bilinearmix(a, b, c, d));
+     //  System.out.println(a + "&" + b + "&" + c + "&" + d + "=" + SColor.bilinearmix(a, b, c, d));
      //  System.out.println(new SColor(rnd.nextInt(255),rnd.nextInt(255),rnd.nextInt(255),rnd.nextInt(255)));
-     }
+    // }
      
-//     add(aimg);
-    add(img);
+     add(aimg);
+   //    add(img);
 //     add(sb);
 //     add(lbl);
 //     add(me);
-        add(img2);
+    //   add(img2);
      restart();
 }  
 //------------------------------------------------------------------------------
@@ -169,17 +170,18 @@ public class Game extends SWindow implements Runnable{
  }
  //------------------------------------------------------------------------------
   public void draw() {//ritar ut allt
-    //Clear screen
+    //Clear screen (ritar en relativ trianel i svart över hela rutan
     SGraphics.setColor(0xFF000000);
     SGraphics.fillRect(0.0f, 0.0f, 1.0f, 1.0f);  
     
-    me.select(tester++);
+   // me.select(tester++);
 
     if(flasher){g.setColor(0xFF00FFFF);flasher = false;}else{g.setColor(0xFFFF00FF);flasher = true;}    
     SGraphics.fillRect((float)java.lang.Math.abs(0.9f*Math.cos((float)(w+=0.01d))-0.1f), (float)java.lang.Math.abs(0.9f*Math.cos((float)(w))-0.1f), 0.1f, 0.1f);
        
+      System.out.print("painting..");
      paint(g);
-    
+      System.out.println("OK");
     //int[] rgbrandomdata = new int[this.getHeight()*this.getWidth()];
     //Random rnd = new Random();
     
