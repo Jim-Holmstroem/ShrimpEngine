@@ -8,10 +8,9 @@ package GUI;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.Graphics;
 
-import Math.Vector2f;
+import Math.Vector2f; 
 import Math.Vector3f;
 import Math.Math;
-
 
 import SGraphics.SColor;
 
@@ -22,7 +21,7 @@ import SGraphics.SColor;
 
 public class SImage extends GUIObject{
     //int[] imgdata;
-    SImageData imgdata;
+    public SImageData imgdata;
     
     public SImage(){
     
@@ -66,7 +65,7 @@ public class SImage extends GUIObject{
             tmpimg.getRGB(imgdata.data, 0, w, 0, 0, w, h);
             
         }catch(Exception e){
-            System.out.println("Error creating Image \""+ filename +   "\": "+e.getMessage());
+            System.out.println("Error creating Image \"" + filename +   "\": " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -82,11 +81,10 @@ public class SImage extends GUIObject{
             tmpimg.getRGB(idata.data, 0, tw, 0, 0, tw, th);
             return idata;
         }catch(Exception e){
-            System.out.println("Error creating Image \""+ filename +   "\": "+e.getMessage());
+            System.out.println("Error creating Image \"" + filename +   "\": "+e.getMessage());
             e.printStackTrace();
             return new SImageData(1,1);//just return a empty image
         }
-     
     }
     
     

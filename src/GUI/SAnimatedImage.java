@@ -14,10 +14,8 @@ import javax.microedition.lcdui.Graphics;
 
 import java.util.Vector;
 
-
 public class SAnimatedImage extends SImage {    
     protected int rows,cols;
-
     protected int currentFrame = 0;
     private boolean updateOnPaint = true;
     
@@ -29,9 +27,9 @@ public class SAnimatedImage extends SImage {
     protected int animationType = STATIC; 
     
     private Vector animations = new Vector();
-    
-    
     private SAnimation currentAnim;
+    
+    private SImageData[] framedata;
     
     public SAnimatedImage() {
         rows = 1;
@@ -41,15 +39,19 @@ public class SAnimatedImage extends SImage {
     public SAnimatedImage(String filename,int rows,int cols){
         this.rows = rows;
         this.cols = cols;
-        System.out.print("loading imgdata...");
-        loadImage(filename);
+        System.out.print("loading framedata...");
+        
+        framedata = SImage.getImageData(filename).split(rows, cols);
+        
         System.out.println("OK");
-        w/=cols;
-        h/=rows;
+        w = framedata[0].w;//den förstas höjd och bredd, alla är lika
+        h = framedata[0].h;
     }
     
     public SAnimatedImage(SImageData imgdata,int rows,int cols){
         this.imgdata = imgdata;
+        this.w = imgdata.w;
+        this.h = imgdata.h;
         this.rows = rows;
         this.cols = cols;
     }
@@ -102,11 +104,8 @@ public class SAnimatedImage extends SImage {
         if(visible){
             if(updateOnPaint)
                 update();
-            if(imgdata.data!=null)
-               // g.drawRegion(imgdata.data, w*(currentFrame%cols), h*(currentFrame/cols), w, h, 0, x, y, Graphics.TOP|Graphics.LEFT);
-               g.drawRGB(imgdata.data,3*w,6*w/*imgdata.size()*/,w*(currentFrame%cols), h*(currentFrame/cols),w,h,true);
-    
-            
+            if(framedata[currentFrame].data!=null)            
+                g.drawRGB(framedata[currentFrame].data, 0, w, x, y, w, h, true);
             if(marked)
                 paintMarking(g);
         }

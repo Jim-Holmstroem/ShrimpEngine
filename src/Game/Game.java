@@ -1,5 +1,6 @@
 package Game;
 
+import GUI.SImageData;
 import javax.microedition.lcdui.*;//rita p skärmen mm, bibl.
 import javax.microedition.lcdui.game.*;//spel-bibl.
 
@@ -45,8 +46,7 @@ public class Game extends SWindow implements Runnable{
 //------------------------------------------------------------------------------     
     //avancerade saker
     public GameEngine gE = new GameEngine(); //spelmotorn
-    public Graphics g = getGraphics(); //hämntar graphics'n
-    public Thread thread;        //tråden
+    public Graphics g = getGraphics(); //hämntar graphics'n används den direkt såhära?
     
     //höjd bredd
     public int height = 0,
@@ -90,6 +90,9 @@ public class Game extends SWindow implements Runnable{
      img = new SImage("menu.png", false);     
      img.setPosition(0.0f, 0.0f);
      img.mark();
+
+    // img.setImage(img.imgdata.split(5, 3)[0]);
+     
     /*
      imgdata = new int[img.getHeight()*img.getWidth()];
      try {
@@ -132,7 +135,7 @@ public class Game extends SWindow implements Runnable{
      System.out.print("initing aimg..");
      aimg.setPosition(0.01f, 0.01f);
      aimg.mark();
-     aimg.addAnimation(new SAnimation(new int[]{1,4,7,10,7,4},5));
+     aimg.addAnimation(new SAnimation(new int[]{0,3,6,9,6,3},5));
      aimg.setAnimation(0);
      aimg.setAnimitionType(SAnimatedImage.ANIMATIONS);
      System.out.println("OK");
@@ -150,8 +153,10 @@ public class Game extends SWindow implements Runnable{
      //  System.out.println(a + "&" + b + "&" + c + "&" + d + "=" + SColor.bilinearmix(a, b, c, d));
      //  System.out.println(new SColor(rnd.nextInt(255),rnd.nextInt(255),rnd.nextInt(255),rnd.nextInt(255)));
     // }
+   
      
-     add(aimg);
+     
+        add(aimg);
    //    add(img);
 //     add(sb);
 //     add(lbl);
