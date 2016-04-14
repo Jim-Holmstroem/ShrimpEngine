@@ -3,6 +3,12 @@
  * and open the template in the editor.
  */
 
+//lägg till så att man inte behöver recalc()
+//ha en liten boolean needRecalc som sätts till true så fort man ändrar ngt men som anropar recalc igen precis innan man ska rita ut den igen..
+
+//tänk på att width och sånt inte räknas ut förrens den ritas ut om man inte har kört en recalc innan
+
+
 package GUI;
 
 import javax.microedition.lcdui.Graphics;
@@ -16,20 +22,19 @@ public class SLabel extends GUIObject{
     private String text = "";//<--hela texten som ska stå där, användas när man ska räkna om maxbredden etc
     private Vector rows = new Vector();//<--varje rad har en egen string
     private int maxWidth=-1;//om -1 så finns dt ingen maxWidth 
-    private int color; 
+    private int color = 0xFFFFFFFF; 
     private boolean cutWords = false;//om det är okey att klippa mitt i ord
-    
+    private boolean recalc = false;
     
     public SLabel(){
         
     }
     public SLabel(String text){
         setText(text);
-        recalc();
     }
-    
-    
+
     public void setText(String text){//testa; sista radbrytet funkar om det bara är en char kvar??
+        recalc = true;
         this.text = text;
         rows.removeAllElements();
         if(maxWidth==-1){
@@ -88,6 +93,7 @@ public class SLabel extends GUIObject{
     }
     
     public void setMaxWidth(float maxWidth){
+        recalc = true;
         if(maxWidth>0||maxWidth==-1){
             this.maxWidth = ReSizer.reX(maxWidth);
         }else{
@@ -99,6 +105,7 @@ public class SLabel extends GUIObject{
         setText(text);
         recalcWidth();
         recalcHeight();
+        recalc = false;
     }
     
     private void recalcWidth(){
@@ -117,11 +124,19 @@ public class SLabel extends GUIObject{
     }
     
     public void paint(Graphics g){
-        g.setColor(color);
-        for (int i = 0; i < rows.size(); i++) {
-            g.drawString((String)rows.elementAt(i), x, y+g.getFont().getHeight()*i, Graphics.TOP|Graphics.LEFT);
-        } 
-        if(marked)
-            paintMarking(g);
+        if(recalc)
+            recalc();
+        if(visible){
+            g.setColor(color);
+            for (int i = 0; i < rows.size(); i++) {
+                g.drawString((String)rows.elementAt(i), x, y+g.getFont().getHeight()*i, Graphics.TOP|Graphics.LEFT);
+            } 
+            if(marked)
+                paintMarking(g);
+        }
     }
+    public String toString(){
+        return text;
+    }
+    
 }

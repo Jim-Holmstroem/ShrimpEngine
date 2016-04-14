@@ -57,13 +57,15 @@ public class StatusBar extends GUIObject{
     }
     
     public void paint(Graphics g){
-        g.setColor(0xFF00FF00);
-        g.fillRect(x, y,(int)(w*(float)((float)value/(float)steps)),h);
-        g.setColor(0xFFFFFFFF);
-        g.setStrokeStyle(Graphics.SOLID);
-        g.drawRect(x, y, w, h);
-        if(marked)
-            this.paintMarking(g);
+        if(visible){
+            g.setColor(0xFF00FF00);
+            g.fillRect(x, y,(int)(w*(float)((float)value/(float)steps)),h);
+            g.setColor(0xFFFFFFFF);
+            g.setStrokeStyle(Graphics.SOLID);
+            g.drawRect(x, y, w, h);
+            if(marked)
+                this.paintMarking(g);
+        }
     }
     
 }

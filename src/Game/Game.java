@@ -5,6 +5,7 @@ import javax.microedition.lcdui.game.*;//spel-bibl.
 
 //Shrimp-packages
 import Core.Shrimplet;
+import Core.SWindowHandler;
 import GameCore.GameEngine;
 
 import GUI.SImage;
@@ -65,6 +66,8 @@ public class Game extends SWindow implements Runnable{
      SGraphics.setGraphics(g);
      
      //init
+     
+     
      SImage img = new SImage("logo.png");
      SLabel lbl = new SLabel();double w=0;
      StatusBar sb = new StatusBar();
@@ -93,7 +96,6 @@ public class Game extends SWindow implements Runnable{
      lbl.setPosition(0.0f, 0.0f);
      lbl.setMaxWidth(1.0f);
      lbl.setText("Bobbo babian bubbar blåa bollar, men inte gröna eftersom han är färgblind..getter äter gräs, ibland iaf");
-     lbl.recalc();
      
      img.setPosition(0.3f, 0.3f);
      
@@ -132,6 +134,13 @@ public class Game extends SWindow implements Runnable{
 
     paint(g);
     
+    
+    
+  //  System.out.println("asking");
+    
+  //  ask("Continue without saving?",new String[]{"Yes","No","Maybe"});
+    
+    
     if(flasher){
         g.setColor(0xFF00FFFF);
         flasher = false;
@@ -147,24 +156,10 @@ public class Game extends SWindow implements Runnable{
  private void CheckCollision(){//tittar om någon av spritsen kolliderar
     
  }
-
  //------------------------------------------------------------------------------
  private void Physics(){//updaterar fysiken i spelet
     
  }
-
-//---[meny]---------------------------------------------------------------------  
- public void menuInput(){
-   
- }
- //------------------------------------------------------------------------------
- public void menuUpdate(){//sätter vilka som inte är tillgängliga lr focuserade lr inte
-
- }
- //------------------------------------------------------------------------------
- public void menuDraw(){//ritar ut allt i menyn; logon, meny mm...   
-
- }  
  //------------------------------------------------------------------------------       
  private void restart(){//restarts level
 

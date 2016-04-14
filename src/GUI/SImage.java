@@ -53,7 +53,7 @@ public class SImage extends GUIObject{
     }
     
     public void paint(Graphics g){
-        if(img!=null)
+        if(img!=null&&visible)
             g.drawImage(img, x, y, Graphics.TOP|Graphics.LEFT);
         if(marked)
             paintMarking(g);   

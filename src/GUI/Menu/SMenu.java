@@ -67,8 +67,9 @@ public class SMenu extends GUIObject{
             }
     }
     public void paint(Graphics g){
-        for(int i = 0;i<menuobjs.length;i++){
-                menuobjs[i].paint(g);
-        }
+        if(visible)
+            for(int i = 0;i<menuobjs.length;i++){
+                    menuobjs[i].paint(g);
+            }
     }
 }

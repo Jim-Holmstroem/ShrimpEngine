@@ -20,8 +20,7 @@ public class SMenuObject extends SAnimatedImage{
     
     public final static int UNMARKED=0,MARKED=1,UNAVALIBLE=2;
     private int status = UNMARKED;
-    
-    
+     
     public SMenuObject(String filename,int rows,int cols,SAnimation anim){//the image is just a reference to the big image, all menuobjects have the same
         super(filename, rows,cols);
         animationType = STATIC_ANIMATIONS;
@@ -43,15 +42,11 @@ public class SMenuObject extends SAnimatedImage{
         setUpdateOnPaint(false);
         update();
     }
-    
-    
-    
-    
+   
     public void setStatus(int status){
         this.status = status;
         setFrameInAnimation(status);
         update();
     }
-    
-    
+       
 }

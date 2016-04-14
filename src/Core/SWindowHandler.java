@@ -11,6 +11,7 @@ package Core;
  */
 import Game.Game;
 
+
 import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.lcdui.Graphics;
 
@@ -21,6 +22,7 @@ public class SWindowHandler extends GameCanvas implements Runnable{
     private Thread thread;
     public Graphics g = getGraphics(); //hämntar graphics'n
     
+    
     //fps handler
     private int mspu = 50;//MilliSecounds Per Update, is a speedlimit, and the program tries to hold it as far as possible
     private long oldTime;
@@ -28,9 +30,10 @@ public class SWindowHandler extends GameCanvas implements Runnable{
     SWindowHandler(Shrimplet parent){
        super(true);
        this.parent = parent;
+       SWindow.setWindowHandler(this);
+       
        
        winds[0] = new Game();
-       
        
        parent.setDisplay(winds[0]);
     
@@ -44,6 +47,9 @@ public class SWindowHandler extends GameCanvas implements Runnable{
     
     public void setWindow(int i){
         currentWindow = i;
+    }
+    public void setWindow(SWindow win){
+        parent.setDisplay(win);
     }
     public int currentWindow(){
         return currentWindow;

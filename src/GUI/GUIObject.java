@@ -11,6 +11,7 @@ import javax.microedition.lcdui.Graphics;
 public class GUIObject {
     protected int x,y,w,h;
     protected boolean marked=false;
+    protected boolean visible=true;
     protected static Graphics g;//behövs denhära här??
     
     

@@ -118,11 +118,13 @@ public class SAnimatedImage extends SImage {
     }
     
     public void paint(Graphics g){
-        if(updateOnPaint)
-            update();
-        if(img!=null)
-            g.drawRegion(img, w*(currentFrame%cols), h*(currentFrame/cols), w, h, 0, x, y, Graphics.TOP|Graphics.LEFT);
-        if(marked)
-            paintMarking(g);
+        if(visible){
+            if(updateOnPaint)
+                update();
+            if(img!=null)
+                g.drawRegion(img, w*(currentFrame%cols), h*(currentFrame/cols), w, h, 0, x, y, Graphics.TOP|Graphics.LEFT);
+            if(marked)
+                paintMarking(g);
+        }
     }
 }
