@@ -23,6 +23,11 @@ public class SLabel extends GUIObject{
     public SLabel(){
         
     }
+    public SLabel(String text){
+        setText(text);
+        recalc();
+    }
+    
     
     public void setText(String text){//testa; sista radbrytet funkar om det bara är en char kvar??
         this.text = text;

@@ -32,10 +32,9 @@ import Core.SWindow;
  */
 
 //------------------------------------------------------------------------------
-public class Game extends GameCanvas implements Runnable{
+public class Game extends SWindow implements Runnable{
 //------------------------------------------------------------------------------     
     //avancerade saker
-    public Shrimplet parent;
     public GameEngine gE = new GameEngine(); //spelmotorn
     public Graphics g = getGraphics(); //hämntar graphics'n
     public Thread thread;        //tråden
@@ -44,37 +43,22 @@ public class Game extends GameCanvas implements Runnable{
     public int height = 0,
                 width = 0; //public höjd/bredd p skärmen
 
-    public SWindow win = new SWindow();
-    
-    public SWindow win2 = new SWindow();
-    
+   
     SMenu me;
     
     public int tester = 0;
     public boolean flasher = false;
     
 //------------------------------------------------------------------------------
- public Game(Shrimplet parent) {//kostruktorn
-    super(true); //stänger av händelse-hanteringen p knapparna //ärver från gamecanvas  <--ska man ha knapp händelse hantering?? kanske funkar mkt bättre än utan : P
-    this.parent = parent; //hämtar midleten
-    setFullScreenMode(true); //sätter full-skärm
-    thread = new Thread(this); //skapar en ny tråd
-    thread.start(); //startar tråden
+ public Game() {//konstruktorn
+    super(); //stänger av händelse-hanteringen p knapparna //ärver från gamecanvas  <--ska man ha knapp händelse hantering?? kanske funkar mkt bättre än utan : P
  }
 //------------------------------------------------------------------------------
  public void run() {//tråden börjar köras här
-    init(); //kör initsieringen ingenting före den om det inte måste, kontrollera flera gånger om så är faller            
-    while(true){
-        draw();
-        flushGraphics(); //målar buffern p skärmen
-        System.gc();//<--rensar skräp //finns dt några nackdelar???(processorkraft?)
-        try{
-            Thread.sleep(1000);
-        }catch(Exception e){}
-    }
+    
  }
 //------------------------------------------------------------------------------
- private void init(){//allt som ska laddas in från början, laddas här...
+ public void init(){//allt som ska laddas in från början, laddas här...
      //pre-init<--- dt hära ska ligga i spelhanteraren sen.. den som tar hand om alla SWindows
      ReSizer.getScreenResolution(getWidth(), getHeight());
      GUIObject.setGraphics(g);
@@ -121,13 +105,11 @@ public class Game extends GameCanvas implements Runnable{
      aimg.setAnimation(0);
      aimg.setAnimitionType(SAnimatedImage.ANIMATIONS);
 
-     win.add(aimg);
-     win.add(img);
-     win.add(sb);
-     win.add(lbl);
-     win.add(me);
-     
-     win2.add(me);
+     add(aimg);
+     add(img);
+     add(sb);
+     add(lbl);
+     add(me);
         
      restart();
 }  
@@ -145,23 +127,20 @@ public class Game extends GameCanvas implements Runnable{
     //Clear screen
     SGraphics.setColor(0xFF000000);
     SGraphics.fillRect(0.0f, 0.0f, 1.0f, 1.0f);  
-
     
     me.select(tester++);
 
+    paint(g);
     
     if(flasher){
         g.setColor(0xFF00FFFF);
         flasher = false;
-    win.paint(g);
    
     }else{
         g.setColor(0xFFFF00FF);
         flasher = true;
-    win2.paint(g);
     }
-    
-    g.fillRect(200, 200, 10, 10);
+    SGraphics.fillRect(0.9f, 0.9f, 0.1f, 0.1f);
     
   }  
  //------------------------------------------------------------------------------
@@ -190,4 +169,6 @@ public class Game extends GameCanvas implements Runnable{
  private void restart(){//restarts level
 
  }
+ 
+
 }

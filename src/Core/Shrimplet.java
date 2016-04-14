@@ -2,35 +2,38 @@ package Core;
 
 import javax.microedition.lcdui.*;
 import javax.microedition.midlet.*;
-import Game.Game;
 
 public class Shrimplet extends MIDlet {
-        public Game canvas;
- 
+        public SWindowHandler winhand;
+
         public Shrimplet() {
-            canvas = new Game(this);//skickar iväg sig själv så att game kan plocka upp den
+            
         }
         public void startApp() {
-            
-            System.out.println("start");
-            
-            Display.getDisplay(this).setCurrent(canvas);//starta spelet
+            System.out.println("startApp()");
+            winhand = new SWindowHandler(this);//skickar iväg sig själv så att game kan plocka upp den
         }
+        
+        public void setDisplay(SWindow disp){
+            Display.getDisplay(this).setCurrent(disp);
+        }        
         public void pauseApp() {
-            
-            System.out.println("pause");
+            System.out.println("pauseApp()");
         }
         public void destroyApp(boolean unconditional)throws MIDletStateChangeException{
-            System.out.println("destroy");
+            System.out.println("destroyApp()");
         }
         
         public void vibrate(int duration){
             Display.getDisplay(this).vibrate(duration);//vibrera
         }
+        public void flashScreen(int duration){
+            Display.getDisplay(this).flashBacklight(duration);
+        } 
+        
         public int numColors(){
             return Display.getDisplay(this).numColors();//hämnta antalet färger i mobilskärmen
         }       
-        
         public void terminateGame() {//stänger av spelet                        
             Display.getDisplay(this).setCurrent(null);//laddar in null
             try{

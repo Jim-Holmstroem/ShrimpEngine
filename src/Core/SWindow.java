@@ -16,14 +16,12 @@ import javax.microedition.lcdui.game.GameCanvas;
 
 import GUI.GUIObject;
 
-public class SWindow extends GameCanvas{
-
-    static protected Vector winds;
-    
+public class SWindow extends GameCanvas{    
     protected Vector guiobj = new Vector();
    
     public SWindow(){
         super(true);
+        setFullScreenMode(true);       
     }
     
     public void paint(Graphics g){
@@ -43,6 +41,19 @@ public class SWindow extends GameCanvas{
     public int numberOfObjects(){
         return guiobj.size();
     }
-    
-    
+    public void init(){
+        System.out.println("WARNING!! - init() must be overriden");
+    }
+    public void draw(){
+        System.out.println("WARNING!! - draw() must be overriden");
+    }
+    public void keyPressed(int code){
+        System.out.println("pushed:" + getKeyName(code));
+    }
+    public void keyReleased(int code){
+        System.out.println("released");
+    }
+    public void keyRepeated(int code){
+        System.out.println("repeated");
+    }
 }
