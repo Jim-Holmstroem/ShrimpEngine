@@ -13,7 +13,7 @@ package Core;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 
-import SGraphics.GUIObject;
+import GUI.GUIObject;
 
 public class SWindow {
 
@@ -21,7 +21,6 @@ public class SWindow {
    
     public void paint(Graphics g){
         for(int i = 0;i<guiobj.size();i++){
-            System.out.println("draws:"+guiobj.elementAt(i).getClass().getName());
             ((GUIObject)guiobj.elementAt(i)).paint(g);
         }
     }

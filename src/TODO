@@ -1,2 +1,9 @@
-JLabel:<--- få stöd för heighten beror på antalet rader åxå!!
+
+//använd den hära metoden när objecten inte behöver vara helt dynamiska utan kan vara statiska när dom körs
+//koden kommer kunna köras mkt fortare
+Object[] somwArray = new Object[someArray.size()];
+someVector.copyInto(someArray);
+
+
+
 

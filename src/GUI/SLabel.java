@@ -9,7 +9,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Font;
 import java.util.Vector;
 
-import SGraphics.GUIObject;
+import GUI.GUIObject;
 import SGraphics.ReSizer;
 
 public class SLabel extends GUIObject{

@@ -3,12 +3,12 @@
  * and open the template in the editor.
  */
 
-package Core;
+package SIO;
 
 /**
  *
  * @author SlimJim xP
  */
-public class GameEngine {
+public class SRecord {
 
 }

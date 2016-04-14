@@ -3,8 +3,9 @@
  * and open the template in the editor.
  */
 
-package SGraphics;
+package GUI;
 
+import SGraphics.*;
 import javax.microedition.lcdui.Graphics;
 
 public class GUIObject {
@@ -18,10 +19,7 @@ public class GUIObject {
     }
     
     
-    public void paint(Graphics g){
-       
-    }
-    
+    public void paint(Graphics g){} 
     
     public void setPosition(float x,float y){
         this.x = ReSizer.reX(x);

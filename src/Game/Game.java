@@ -5,15 +5,16 @@ import javax.microedition.lcdui.game.*;//spel-bibl.
 
 //Shrimp-packages
 import Core.Shrimplet;
-import Core.GameEngine;
+import GameCore.GameEngine;
 
 
 
 
 import GUI.SImage;
+import GUI.SAnimatedImage;
 import GUI.SLabel;
 import GUI.StatusBar;
-import SGraphics.GUIObject;
+import GUI.GUIObject;
 import SGraphics.ReSizer;
 import SGraphics.SGraphics;
 import Core.SWindow;
@@ -41,8 +42,6 @@ public class Game extends GameCanvas implements Runnable{
     public int height = 0,
                 width = 0; //public höjd/bredd p skärmen
 
-    
-    
     public SWindow win = new SWindow();
     
     
@@ -79,6 +78,7 @@ public class Game extends GameCanvas implements Runnable{
      SImage img = new SImage("logo.png");
      SLabel lbl = new SLabel();double w=0;
      StatusBar sb = new StatusBar();
+     SAnimatedImage aimg = new SAnimatedImage("menu.png",5,2);
      
      
      sb.setPosition(0.15f, 0.8f);
@@ -94,14 +94,23 @@ public class Game extends GameCanvas implements Runnable{
      lbl.setText("Bobbo babian bubbar blåa bollar, men inte gröna eftersom han är färgblind..getter äter gräs, ibland iaf");
      lbl.recalc();
      
-     img.mark();
+
      img.setPosition(0.3f, 0.3f);
      
-     win.add(img);
-     win.add(sb);
-     win.add(lbl);
+     
+     aimg.setPosition(0.01f, 0.01f);
+     aimg.mark();
      
      
+     
+     win.add(aimg);
+   //  win.add(img);
+   //  win.add(sb);
+   //  win.add(lbl);
+    
+     
+     System.out.println("graphics alike:");
+    
      restart();
 }  
 //------------------------------------------------------------------------------
@@ -121,7 +130,7 @@ public class Game extends GameCanvas implements Runnable{
     
     win.paint(g);
       try {
-          Thread.sleep(10);
+          Thread.sleep(1000);
       } catch (Exception e) {
       }
     

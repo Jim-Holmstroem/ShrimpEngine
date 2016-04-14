@@ -3,18 +3,12 @@
  * and open the template in the editor.
  */
 
-package Core;
+package GameCore;
 
 /**
  *
  * @author SlimJim xP
  */
-public class SWindowHandler {
+public class GameEngine {
 
-    public SWindow[] winds= new SWindow[10];
-    
-    SWindowHandler(){
-    
-    }
-  
 }

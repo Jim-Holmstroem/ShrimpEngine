@@ -11,7 +11,7 @@ package GUI;
  */
 import javax.microedition.lcdui.Graphics;
 
-import SGraphics.GUIObject;
+import GUI.GUIObject;
 
 
 public class StatusBar extends GUIObject{

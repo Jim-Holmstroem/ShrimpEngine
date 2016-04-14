@@ -12,7 +12,7 @@ public class Shrimplet extends MIDlet {
         }
         public void startApp() {
             
-            System.out.println("Oscar är bäst!!start");
+            System.out.println("start");
             
             Display.getDisplay(this).setCurrent(canvas);//starta spelet
         }

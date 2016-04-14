@@ -3,18 +3,23 @@
  * and open the template in the editor.
  */
 
-package Core;
+package SIO;
 
 /**
  *
  * @author SlimJim xP
  */
-public class SWindowHandler {
 
-    public SWindow[] winds= new SWindow[10];
-    
-    SWindowHandler(){
-    
+import javax.microedition.rms.*;
+
+
+
+public class SRMS {
+
+
+    public SRMS(){
+        
     }
-  
+    
+    
 }
