@@ -11,12 +11,17 @@ public class Shrimplet extends MIDlet {
             canvas = new Game(this);//skickar iväg sig själv så att game kan plocka upp den
         }
         public void startApp() {
+            
+            System.out.println("Oscar är bäst!!start");
+            
             Display.getDisplay(this).setCurrent(canvas);//starta spelet
         }
         public void pauseApp() {
-            canvas.gameStatus = Game.PAUSE;
+            
+            System.out.println("pause");
         }
         public void destroyApp(boolean unconditional)throws MIDletStateChangeException{
+            System.out.println("destroy");
         }
         
         public void vibrate(int duration){
@@ -25,6 +30,7 @@ public class Shrimplet extends MIDlet {
         public int numColors(){
             return Display.getDisplay(this).numColors();//hämnta antalet färger i mobilskärmen
         }       
+        
         public void terminateGame() {//stänger av spelet                        
             Display.getDisplay(this).setCurrent(null);//laddar in null
             try{
