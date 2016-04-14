@@ -24,10 +24,10 @@ public abstract class ReSizer {
         return (int)(y*(float)screenHeight);
     }
     public static float ireX(int x){
-        return (float)(x/screenWidth);
+        return ((float)x/(float)screenWidth);
     }
     public static float ireY(int y){
-        return (float)(y/screenHeight);
+        return ((float)y/(float)screenHeight);
     }
     
 }

@@ -17,17 +17,23 @@ import java.util.Vector;
 
 
 public class SAnimatedImage extends SImage {    
-    private int rows,cols;
+    protected int rows,cols;
 
-    private int currentFrame = 0;
+    protected int currentFrame = 0;
     private boolean updateOnPaint = true;
+    
+    
     
     //different animation types (int:animationType)
     public final static int STATIC = 0,         //current frame until user changes frame 
     // ??                   ROLLING = 1,        //rolling, taking next frame for every update
                             ANIMATIONS = 2;     //user defined animations
             
-    private int animationType = STATIC; 
+    
+    
+    
+    
+    protected int animationType = STATIC; 
     
     private Vector animations = new Vector();
     private SAnimation currentAnim;
@@ -40,16 +46,9 @@ public class SAnimatedImage extends SImage {
     public SAnimatedImage(String filename,int rows,int cols){
         this.rows = rows;
         this.cols = cols;
-        
         loadImage(filename);
-        
-        System.out.println("before;"+"w:"+w+" h:"+h);
-        
         w/=cols;
         h/=rows;
-        
-        System.out.println("w:"+w+" h:"+h);
-        
     }
     
     public SAnimatedImage(Image img,int rows,int cols,boolean wantCopy){
@@ -85,29 +84,38 @@ public class SAnimatedImage extends SImage {
     public void setUpdateOnPaint(boolean updateOnPaint){
         this.updateOnPaint = updateOnPaint;
     }
-    
     public void setAnimitionType(int animationType){
         this.animationType = animationType;
     }
-    
-    public void setFrame(int frame){
-        this.currentFrame = frame;
+    public void setAnimation(int i){
+        currentAnim = getAnimationAt(i);
     }
-    
+    public void setFrame(int frame){  
+        this.currentFrame = frame;
+        this.currentFrame%=cols*rows;
+    }
+    public void setFrameInAnimation(int frame){
+        setFrame(currentAnim.getRealFrame(frame));
+    }
     public int getFrame(){
         return this.currentFrame;
     }
     
     public void update(){
-        currentFrame++;
+        if(animationType==STATIC){
+            
+        }
+        if(animationType==ANIMATIONS){
+            currentAnim.update();
+            setFrame(currentAnim.getRealFrame());    
+        }
     }
     
     public void paint(Graphics g){
         if(updateOnPaint)
             update();
-        if(img!=null){    
+        if(img!=null)
             g.drawRegion(img, w*(currentFrame%cols), h*(currentFrame/cols), w, h, 0, x, y, Graphics.TOP|Graphics.LEFT);
-        }
         if(marked)
             paintMarking(g);
     }

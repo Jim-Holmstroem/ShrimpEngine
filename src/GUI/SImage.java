@@ -8,8 +8,7 @@ package GUI;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.Graphics;
 
-
-import GUI.GUIObject;
+import Core.Core;
 
 
 /**
@@ -35,9 +34,6 @@ public class SImage extends GUIObject{
     public Image getImage(){
         return img;
     }
-     
-    
-    
     
     public void loadImage(String filename){
         try{
@@ -48,6 +44,7 @@ public class SImage extends GUIObject{
             System.out.println("Error creating Image \""+ filename +   "\": "+e.getMessage());
         }
    }
+   
     
     public void setImage(Image img){
         this.img = img;
@@ -59,8 +56,6 @@ public class SImage extends GUIObject{
         if(img!=null)
             g.drawImage(img, x, y, Graphics.TOP|Graphics.LEFT);
         if(marked)
-            paintMarking(g);
-        
-    }
-    
+            paintMarking(g);   
+    }    
 }

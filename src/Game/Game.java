@@ -12,9 +12,14 @@ import GameCore.GameEngine;
 
 import GUI.SImage;
 import GUI.SAnimatedImage;
+import GUI.SAnimation;
 import GUI.SLabel;
 import GUI.StatusBar;
 import GUI.GUIObject;
+
+import GUI.Menu.SMenuObject;
+import GUI.Menu.SMenu;
+
 import SGraphics.ReSizer;
 import SGraphics.SGraphics;
 import Core.SWindow;
@@ -44,6 +49,11 @@ public class Game extends GameCanvas implements Runnable{
 
     public SWindow win = new SWindow();
     
+    SMenuObject mo;
+    SMenu me;
+    
+    
+    public boolean flasher = false;
     
 //------------------------------------------------------------------------------
  public Game(Shrimplet parent) {//kostruktorn
@@ -58,12 +68,11 @@ public class Game extends GameCanvas implements Runnable{
     init(); //kör initsieringen ingenting före den om det inte måste, kontrollera flera gånger om så är faller            
     while(true){
         draw();
-        System.gc();//<--rensar skräp //finns dt några nackdelar???(processorkraft?)
         flushGraphics(); //målar buffern p skärmen
-        try {
-            Thread.sleep(10);
-        } catch (Exception e) {
-        }
+        System.gc();//<--rensar skräp //finns dt några nackdelar???(processorkraft?)
+        try{
+            Thread.sleep(1000);
+        }catch(Exception e){}
     }
  }
 //------------------------------------------------------------------------------
@@ -74,11 +83,28 @@ public class Game extends GameCanvas implements Runnable{
      SGraphics.setGraphics(g);
      
      //init
-     
      SImage img = new SImage("logo.png");
      SLabel lbl = new SLabel();double w=0;
      StatusBar sb = new StatusBar();
-     SAnimatedImage aimg = new SAnimatedImage("menu.png",5,2);
+     SAnimatedImage aimg = new SAnimatedImage("menu.png",5,3);
+     
+     mo = new SMenuObject("menu.png",5,3,new SAnimation(new int[]{3,4,5},1));
+     
+     mo.setPosition(0.5f, 0.5f);
+     mo.setStatus(SMenuObject.MARKED);
+     
+     me = new SMenu(
+         new SMenuObject[]{
+                           new SMenuObject("menu.png",5,3,new SAnimation(new int[]{ 0, 1, 2},1)),
+                           new SMenuObject("menu.png",5,3,new SAnimation(new int[]{ 3, 4, 5},1)),
+                           new SMenuObject("menu.png",5,3,new SAnimation(new int[]{ 6, 7, 8},1)),
+                           new SMenuObject("menu.png",5,3,new SAnimation(new int[]{ 9,10,11},1)),
+                           new SMenuObject("menu.png",5,3,new SAnimation(new int[]{12,13,14},1))
+                          }
+     );
+     
+     me.setPosition(0.50f, 0.50f);
+     
      
      
      sb.setPosition(0.15f, 0.8f);
@@ -94,23 +120,25 @@ public class Game extends GameCanvas implements Runnable{
      lbl.setText("Bobbo babian bubbar blåa bollar, men inte gröna eftersom han är färgblind..getter äter gräs, ibland iaf");
      lbl.recalc();
      
-
      img.setPosition(0.3f, 0.3f);
      
+     SAnimation anim = new SAnimation(new int[]{1,4,7,10,7,4},2);
      
      aimg.setPosition(0.01f, 0.01f);
      aimg.mark();
+     aimg.addAnimation(anim);
+     aimg.setAnimation(0);
+     aimg.setAnimitionType(SAnimatedImage.ANIMATIONS);
+
+     
+//     win.add(aimg);
+     win.add(img);
+//     win.add(sb);
+//     win.add(lbl);
+//     win.add(mo);
+     win.add(me);
      
      
-     
-     win.add(aimg);
-   //  win.add(img);
-   //  win.add(sb);
-   //  win.add(lbl);
-    
-     
-     System.out.println("graphics alike:");
-    
      restart();
 }  
 //------------------------------------------------------------------------------
@@ -129,10 +157,18 @@ public class Game extends GameCanvas implements Runnable{
     SGraphics.fillRect(0.0f, 0.0f, 1.0f, 1.0f);  
     
     win.paint(g);
-      try {
-          Thread.sleep(1000);
-      } catch (Exception e) {
-      }
+      
+    if(flasher){
+        mo.setStatus(SMenuObject.MARKED);
+        g.setColor(0xFF00FFFF);
+        flasher = false;
+    }else{
+        mo.setStatus(SMenuObject.UNMARKED);
+        g.setColor(0xFFFF00FF);
+        flasher = true;
+    }
+    
+    g.fillRect(200, 200, 10, 10);
     
   }  
  //------------------------------------------------------------------------------

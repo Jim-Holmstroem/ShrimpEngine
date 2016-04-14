@@ -6,4 +6,19 @@ someVector.copyInto(someArray);
 
 
 
+//gör om så att man inte behöver använda kopia av samma bild till varsin menuobjct i menyn
+
+
+//gör flera olika types av Animated image tex STATIC_ANIMATION (SAnimatedImage.java)
+
+
+
+
+
+
+
+
+
+
+
 
