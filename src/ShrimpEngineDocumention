@@ -1,0 +1,235 @@
+*******************************[Core]*******************************************
+
+>Core.java
+
+    loadImage(String filename):Image
+        load and returns a image
+
+>SWindow.java (extends GameCanvas) (NOTE must be static-inited)
+
+    setWindowHandler(WindowHandler winh):void
+    paint(Graphics g):void(overrides)
+        paints every component
+    add(GUIObject):void
+        adds a GUIObject to the window
+    remove(int n):void
+        removes component number n
+    remove(GUIObject obj):void
+        removes the component from window
+    numberOfObjects():int
+        returns the number of components in window
+    init():void
+        no function in SWindow but must be overriden by childrens
+    draw():void
+        no function in SWindow but must be overriden by childrens
+    
+    
+
+
+>SWindowHandler.java
+
+
+
+>Shrimplet.java (extends MIDlet)
+
+    SWindowHandler winh;
+
+    startApp():void(overrides)
+        method is called when the app is starting
+        creates the windowhandler <isn't it possible to run this severaltimes under on prgmseason?,this is a possible bug>
+    pauseApp():void(overrides)
+        method is called when the app is paused
+    destroyApp():void(overrides)
+        method is callad when the app is destroyed
+    vibrate(int n):void
+        vibrates the phone under n ms
+    flashScreen(int n):void
+        flashes the phones back-LED under n ms
+    numColurs():int<rename to 'getNumberOfColors()'>
+        returns the number of colors on the screen
+    terminateGame():void
+        shutdows the game by unloading the game and running 'destroyApp()' and
+        then notify all about termination
+    
+
+
+*******************************[GUI]********************************************
+
+>GUIObject.java
+
+>SImage.java
+
+>SAnimatedImage.java
+
+>SAnimation.java
+
+>SLabel.java
+
+>Statusbar.java
+
+*******************************[GUI.menu]***************************************
+
+>SMenu.java
+
+>SMenuOebject.java
+
+*******************************[Game]*******************************************
+
+>Game.java
+
+*******************************[GameCore]***************************************
+
+>Shrimp.java
+
+>ShrimpList.java
+
+*******************************[Math]*******************************************
+
+>Vector2f.java
+    public int x,y
+
+    Vector2f()
+        creates new zero-vector
+    Vector2f(float x,float y)
+        creates new vector with given coords
+    Vector2f(Vector2f v)
+        creates new vector that has the coords as v
+
+    add(Vector2d v):void
+        adds v to the vector
+    sub(Vector2d v):void
+        subtracts v from the vector
+    scale(float a):void
+        scales the vector with a
+    abs():float
+        returns the absolutvalue for the vector
+    arg():float<notsupportedyet>
+        returns the argument for the vector
+    toString():String(overrides)
+        returns "(x,y)"
+
+>Vector3f.java
+    public int x,y,z
+
+    Vector3f()
+        creates new zero-vector
+    Vector3f(float x,float y,float z)
+        creates new vector with given coords
+    Vector3f(Vector3f v)
+        creates new vector that has the coords as v
+
+    add(Vector3d v):void
+        adds v to the vector
+    sub(Vector3d v):void
+        subtracts v from the vector
+    scale(float a):void
+        scales the vector with a
+    abs():float
+        returns the absolutvalue for the vector
+    arg():float<notsupportedyet><how to solve it with multiple angeles?>
+        returns the argument for the vector
+    toString():String(overrides)
+        returns "(x,y,z)"
+
+>Math.java
+
+Math constants and functions 1D,2D,3D and linear algebra
+
+static float PI,E
+
+[1D]
+    sin(float a):float(static)
+        returns java.util.Math.sin
+    cos(float a):float(static)
+        returns java.util.Math.cos
+    tan(float a):float(static)
+        returns java.util.Math.tan
+    tan2(float a,float b):float(static)<notsupportedyet><check what squadron you are in and return value according to that>
+        returns the actual angle to (a,b), can be greater then PI/4
+    sqrt(float a):float(static)
+        returns java.util.Math.sqrt
+    pow(float a,int b):float(static)
+        returns a^b
+    grd(int n):float(static)
+        returns (-1)^n
+    fak(int n):int(static)
+        returns n!
+        0-12 is hardcoded and very fast,
+        12-> is calculated from 12! and can be very slow and perhaps incorrect
+        during to large numbers for integers
+[2D]
+    sum(Vector2f a,Vector2f b):Vector2f(static)
+        returns a+b
+    sum(Vector2f[] as):Vector2f(static)
+        returns sum of all vectors in array
+    diff(Vector2f a,Vector2f b):Vector2f(static)
+        returns difference between a and b
+    dot(Vector2f a,Vector2f b):float(static)
+        returns dot-product of a and b
+    crossZ(Vector2f a,Vector2f b):float
+        returns the z-component of (a.x,a.y,0)x(b.x,b.y,0)
+[3D]
+    sum(Vector3f a,Vector3f b):Vector3f(static)
+        returns a+b
+    sum(Vector3f[] as):Vector3f(static)
+        returns sum of all vectors in array
+    diff(Vector3f a,Vector3f b):Vector3f(static)
+        returns difference between a and b
+    dot(Vector3f a,Vector3f b):float(static)
+        returns dot-product of a and b
+    cross(Vector3f a,Vector3f):Vector3f
+        returns cross-product of a and b
+
+[LinAlg]
+
+    det(float a,float b,float c,float d):float
+        returns determinant of a,b,c,d
+                |a b|
+           det= |c d|
+    
+
+*******************************[SGraphics]**************************************
+
+>ReSizer.java (NOTE that it must be inited before use)
+
+    used internally by those classes that need to draw things on the screen.
+    
+    getScreenResolution(int width,int height):void(static)<rename to get***><run exception if not inited>
+        sets the screenresolution on resizer so that it can transform the coords
+    reX(float x):int(static)
+        transforms from relativ x to screen x
+    reY(float y):int(static)
+        transforms from relativ y to screen y
+    ireX(int x):float(static)
+        invers of 'reX()'
+    ireY(int y):float(static)
+        invers of 'reY()'
+
+>SGraphics.java (NOTE that it must be inited before use)
+    
+    wrapper that works as javax.microedition.lcdui.Graphics but relativ to 
+    screen.
+    
+    setGraphics(Graphics g):void(static)
+        sets the graphics of SGraphics as the graphics that is used.
+    fillRect(float x,float y,float w,float h):void(static)
+        draws a filled rect on the relativ coords
+    drawRect(float x,float y,float w,float h):void(static)
+        draws a rect on the relativ coords
+    drawLine(float x1,float y1,float x2,float y2):void(static)
+        draws a line on the relativ coords
+    setStrokeStyle(int strokestyle):void(static)
+        sets strokesstyle on g
+    setColor(int color):void(static)
+        sets the color on g
+    setColor(int cr,int cg,int cb):void(static)
+        sets the color on g
+    setFont(Font font):void
+
+*******************************[SIO]********************************************
+
+>SFile.java
+
+>SRMS.java
+
+>SRecord.java

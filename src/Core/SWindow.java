@@ -24,6 +24,7 @@ import SGraphics.SGraphics;
 public class SWindow extends GameCanvas{    
     protected Vector guiobj = new Vector();
     static SWindowHandler winh;
+    
     Question q;boolean asking = false;
     
     
@@ -111,6 +112,7 @@ public class SWindow extends GameCanvas{
             for (int i = 1; i < objs.length; i++) {
                 objs[i] = new SLabel();
                 objs[i].setText(options[i-1]);
+                objs[i].recalc();
                 
                 objs[i].setPosition(0.2f, 0.1f*i);
                 System.out.println(objs[i]);

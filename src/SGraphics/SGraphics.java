@@ -32,8 +32,8 @@ public class SGraphics{
     public static void setColor(int color){
         g.setColor(color);
     }
-    public static void setColor(int r,int g,int b){
-        System.out.println("not supported yet!!");
+    public static void setColor(int cr,int cg,int cb){
+        g.setColor(cr,cg,cb);
     }
     public static void setFont(Font font){
         g.setFont(font);

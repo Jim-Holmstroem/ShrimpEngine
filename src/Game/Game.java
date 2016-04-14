@@ -22,6 +22,10 @@ import SGraphics.ReSizer;
 import SGraphics.SGraphics;
 import Core.SWindow;
 
+import Math.Math;
+import Math.Vector3f;
+
+
 
 /* saker som bör göras :
  * -> enklare att skapa menyer
@@ -68,6 +72,7 @@ public class Game extends SWindow implements Runnable{
      //init
      
      
+     
      SImage img = new SImage("logo.png");
      SLabel lbl = new SLabel();double w=0;
      StatusBar sb = new StatusBar();
@@ -96,6 +101,7 @@ public class Game extends SWindow implements Runnable{
      lbl.setPosition(0.0f, 0.0f);
      lbl.setMaxWidth(1.0f);
      lbl.setText("Bobbo babian bubbar blåa bollar, men inte gröna eftersom han är färgblind..getter äter gräs, ibland iaf");
+     lbl.recalc();
      
      img.setPosition(0.3f, 0.3f);
      
@@ -134,11 +140,9 @@ public class Game extends SWindow implements Runnable{
 
     paint(g);
     
+    System.out.println("asking");
     
-    
-  //  System.out.println("asking");
-    
-  //  ask("Continue without saving?",new String[]{"Yes","No","Maybe"});
+    ask("Continue without saving?",new String[]{"Yes","No","Maybe"});
     
     
     if(flasher){
